@@ -7,11 +7,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/freshwater-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/freshwater-{{ version }}.tar.gz
   sha256: 9442b73be7ffc9cfeaf04285698d701b6ae08ea34c075f895fa73797878a1be1
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script:
     - rm -rf pyproject.toml
@@ -21,10 +21,10 @@ requirements:
   host:
     - pip
     - poetry >=0.12
-    - python >=3.7,<4.0
+    - python {{ python_min }}
   run:
     - numpy >=1.19.1,<2.0.0
-    - python >=3.7,<4.0
+    - python >={{ python_min }},<4.0
 
 test:
   imports:
@@ -33,6 +33,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/danielrobb/freshwater
